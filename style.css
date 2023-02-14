@@ -5,33 +5,62 @@ html {
 
 body {
         margin: 0;
+        display: grid;
+        grid-template-areas:
+        "a"
+        "b"
+        "c"
+        "d";       
+        font-family: 'Gentium Book Plus', serif;
 }
 
-/*header*/
-header {
+body > header{
+        grid-area: a;
+}
+
+body > #maincontainer1Grid{
+        grid-area: b;
+}
+
+body > #containerStory{
+        grid-area: c;
+}
+
+body > footer{
+        grid-area: d;
+}
+
+/*Header*/
+
+#nonMobile-HeaderItem {
         display: flex;
         justify-content: space-around;
         align-items: center;
         border-bottom: 1px solid black;
         height: 100px;
         background-color: rgba(0,0,0,0.9);
-
 }
 
-#tablet {
-        display: none;
+.headerItem{
+        color:white;
 }
 
-#company {
+.headerItem:hover{
+        color: gold;
+        text-decoration: underline;
+        text-transform: uppercase;
+}
+
+#companyName {
         text-align: center;
-        color: white;
+        margin: 0;
 }
 
 #logo {
         height: 70px;
 }
 
-#company h3 {
+#companyName h3 {
         margin: 0;
 }
 
@@ -43,17 +72,102 @@ header {
 #list1 li, #list2 h4 {
         margin: 2rem;
         font-size: 1.17rem;
-        color: white;
 }
 
 #list2 {
         display: flex;       
 }
 
-/*studio*/
+
+
+@media only screen and (max-width:480px){
+        #nonMobile-HeaderItem{
+                display: none;
+        }
+
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 48,
+        }
+
+        #m-list1 .material-symbols-outlined{
+                margin: 0 1rem;
+                font-size: 40px;
+        }
+
+        header{
+                height: auto;
+        }
+
+        #mobile-HeaderItem{
+                display: grid;
+                grid: 1fr 1fr/1fr;
+                width: 100%;
+                background-color: black;
+                
+        }
+
+        #m-company{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+        }
+
+        #m-logo, #m-companyName{
+                margin: 0.5rem 1rem;
+                font-size: 4rem
+        }
+
+        
+
+        #m-list1{
+                display: flex;
+                flex-direction:row;
+                align-items: center;
+                justify-content: center;
+                color:white;
+                list-style-type: none ;
+                margin: 0;
+                height: auto;
+                position: sticky;
+
+        }
+}
+
+@media only screen and (min-width:480px) {
+        #mobile-HeaderItem{
+                display: none;
+        }
+}
+
+/*studio-offer-story for (p, h3)*/
+
+#studio h3, #offer h3, #join, #story h3{
+        font-size: 3rem;
+}
+
+#studio p, #offer p{
+        font-size: 1.5rem
+}
+
+#studioText{
+        padding: 0 3.5rem;
+}
+
 #maincontainer1 {
         display: grid;
         grid: auto/repeat(2,1fr);
+}
+
+@media only screen and (max-width:480px){
+        #maincontainer1 {
+                display: grid;
+                grid: auto/1fr;
+        }
 }
 
 #container1 {
@@ -95,8 +209,16 @@ header {
 
 
 /*Special offer*/
-#offer {
-        line-height: 3;
+#containerOffer{
+        background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("./images/offer.jpg");
+        background-size:contain;
+}
+
+@media only screen and (max-width:480px){
+        #containerOffer {
+                background-size: cover;
+                background-position: bottom;
+        }
 }
 
 #define {
@@ -118,15 +240,24 @@ header {
 }
 
 #join a:hover {
-        background-color:white
+        background-color:gold;
+        text-transform: uppercase;
 }
 
 #join a:active {
         box-shadow:none;
-        font-size: larger;
 }
 
 /*Stories*/
+
+#story{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: antiquewhite;
+}
+
 #story h1{
         text-align: center;
         padding: 2%;
@@ -134,7 +265,7 @@ header {
 
 #storyGrid{
         display: grid;
-        grid: repeat(4, 100px)/repeat(20,100px);
+        grid: repeat(4, 100px)/repeat(18,100px);
 }
 
 .imgStory{
@@ -145,6 +276,7 @@ header {
 
 #imgStory3{
         grid-area: 1/12/5/16;
+        border-top-right-radius: 5rem;
 }
 
 #imgStory2{
@@ -153,12 +285,19 @@ header {
 
 #imgStory1{
         grid-area: 3/4/8/9;
+        border-bottom-left-radius: 5rem;
+}
+
+.text{
+        font-family: 'Caveat', cursive;
 }
 
 #text3{
-        grid-area: 1/16/2/18;
+        grid-area: 3/13/4/16;
         padding-left: 1.5rem;
         font-size: 1.2rem;
+        padding-top: 2.5rem;
+        font-size: 130%;
 }
 
 #text2{
@@ -167,27 +306,37 @@ header {
         font-size: 1.2rem;
         position: relative;
         top: 1rem;
+        font-size: 130%;
 }
 
 #text1{
         padding-right: 1.5rem;
         font-size: 1.2rem;
         grid-area: 2/4/2/8;
+        font-size: 130%;
         
 }
 /*Footer*/
-footer {
+
+#subFooter {
         display: grid;
         grid: auto/repeat(3, 1fr);
         align-items: center;
+        
         width: 100%;
         background-color: gold;
-        position: absolute;
+        position: relative;
         bottom: 0px;
 }
 
 #tablet-f {
         display:none;
+}
+
+#subFooterItemLeft{
+        position: relative;
+        display: flex;
+        justify-content: center;
 }
 
 footer img {
@@ -201,9 +350,11 @@ footer img {
         background-color: gold;
 }
 
-#contact p {
+#subFooterItemRight {
         line-height: 1.5;
         text-align: left;
-        margin-left: 10rem;
+        position: relative;
+        display: flex;
+        justify-content: center;
 }
 
